@@ -1,0 +1,1 @@
+select acct_id, empl_name, SUM(salary) as salary FROM (select * from dm.empl_dim_cur)x GROUP BY acct_id, empl_name;
