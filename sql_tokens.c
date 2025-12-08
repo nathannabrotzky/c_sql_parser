@@ -68,19 +68,8 @@ int main(void) {
       }
       bool stopFlag = is_stop(c);
       bool puncFlag = is_punctuation(c);
-      if (stopFlag && layer == 0) {
+      if ((stopFlag || puncFlag) && ((c == '(' && layer == 1)|| layer == 0)) {
         if (buffer[0] != '\0') {
-          sqlToken newToken;
-          strcpy(newToken.type,(is_keyword(buffer)? "KEYWORD" : "IDENTIFIER"));
-          strcpy(newToken.value,buffer);
-          printf("%s %s\n",newToken.type, newToken.value);
-        }
-        buffer[0] = '\0';
-        offset = i + 1;
-        continue;
-      } 
-      if (puncFlag) {
-        if (buffer[0] != '\0' && ((c == '(' && layer == 1)|| layer == 0)) {
           sqlToken newToken;
           strcpy(newToken.type,(is_keyword(buffer)? "KEYWORD" : "IDENTIFIER"));
           strcpy(newToken.value,buffer);
